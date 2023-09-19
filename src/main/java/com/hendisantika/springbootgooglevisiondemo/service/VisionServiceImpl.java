@@ -5,10 +5,12 @@ import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.Feature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -55,6 +57,18 @@ public class VisionServiceImpl implements VisionService {
     @Override
     public List<String> extractTextFromPdf(MultipartFile file) {
         return cloudVisionTemplate.extractTextFromPdf(file.getResource());
+    }
+
+    @Override
+    public byte[] detectFaceFromImage(MultipartFile file) throws IOException {
+        AnnotateImageResponse response = cloudVisionTemplate.analyzeImage(
+                file.getResource(), Feature.Type.FACE_DETECTION);
+        Resource outputImageResource = resourceLoader.
+                getResource("file:src/main/resources/output.jpg");
+
+        return writeWithFaces(file,
+                outputImageResource.getFile().toPath(),
+                response.getFaceAnnotationsList());
     }
 
 }
