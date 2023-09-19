@@ -4,6 +4,7 @@ import com.google.cloud.spring.vision.CloudVisionTemplate;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.FaceAnnotation;
 import com.google.cloud.vision.v1.Feature;
+import com.google.cloud.vision.v1.Vertex;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -97,6 +99,17 @@ public class VisionServiceImpl implements VisionService {
         for (FaceAnnotation face : faces) {
             annotateWithFace(img, face);
         }
+    }
+
+    private static void annotateWithFace(BufferedImage img, FaceAnnotation face) {
+        Graphics2D gfx = img.createGraphics();
+        Polygon poly = new Polygon();
+        for (Vertex vertex : face.getFdBoundingPoly().getVerticesList()) {
+            poly.addPoint(vertex.getX(), vertex.getY());
+        }
+        gfx.setStroke(new BasicStroke(5));
+        gfx.setColor(new Color(0xFFFF00));
+        gfx.draw(poly);
     }
 
 }
