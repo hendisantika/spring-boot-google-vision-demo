@@ -33,4 +33,10 @@ public class VisionController {
         return visionService.extractTextFromImage(file);
     }
 
+    //Get landmark from Image
+    @PostMapping("/getLandmarkFromImage")
+    public String getLandmarkFromImage(@RequestParam MultipartFile file) {
+        return visionService.getLandmarkFromImage(file);
+    }
+
 }
