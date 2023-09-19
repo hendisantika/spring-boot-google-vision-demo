@@ -39,4 +39,10 @@ public class VisionController {
         return visionService.getLandmarkFromImage(file);
     }
 
+    //Detect label from image
+    @PostMapping("/detectLabelFromImage")
+    public String detectLabelFromImage(@RequestParam MultipartFile file) {
+        return visionService.detectLabelFromImage(file);
+    }
+
 }
