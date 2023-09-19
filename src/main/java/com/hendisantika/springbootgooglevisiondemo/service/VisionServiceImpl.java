@@ -43,4 +43,11 @@ public class VisionServiceImpl implements VisionService {
         return response.getLandmarkAnnotationsList().toString();
     }
 
+    @Override
+    public String detectLabelFromImage(MultipartFile file) {
+        AnnotateImageResponse response = cloudVisionTemplate.analyzeImage(
+                file.getResource(), Feature.Type.LABEL_DETECTION);
+        return response.getLabelAnnotationsList().toString();
+    }
+
 }
