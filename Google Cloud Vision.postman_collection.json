@@ -1,0 +1,150 @@
+{
+  "info": {
+    "_postman_id": "bfc980b6-111e-44b9-9953-d2c8264690fc",
+    "name": "Google Cloud Vision",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "276892"
+  },
+  "item": [
+    {
+      "name": "Extract Text From Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/hendi/Downloads/Google Cloud Vision/Faces.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:8080/extractTextFromImage",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "extractTextFromImage"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Detect Face From Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/hendi/Downloads/Google Cloud Vision/Faces.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:8080/detectFaceFromImage",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "detectFaceFromImage"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Landmark From Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/hendi/Downloads/Google Cloud Vision/Sydney-Opera-House.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:8080/getLandmarkFromImage",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "getLandmarkFromImage"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Detect Label From Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/hendi/Downloads/Google Cloud Vision/sunflower-pictures.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:8080/detectLabelFromImage",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "detectLabelFromImage"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Extract Text From Pdf",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "/C:/Users/hendi/Downloads/Google Cloud Vision/hello-world.pdf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "localhost:8080/extractTextFromPdf",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "extractTextFromPdf"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
