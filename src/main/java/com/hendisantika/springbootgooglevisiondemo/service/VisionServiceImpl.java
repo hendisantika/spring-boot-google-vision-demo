@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,5 +27,11 @@ public class VisionServiceImpl implements VisionService {
     private final CloudVisionTemplate cloudVisionTemplate;
 
     private final ResourceLoader resourceLoader;
+
+    @Override
+    public String extractTextFromImage(MultipartFile file) {
+        return cloudVisionTemplate.
+                extractTextFromImage(file.getResource());
+    }
 
 }
