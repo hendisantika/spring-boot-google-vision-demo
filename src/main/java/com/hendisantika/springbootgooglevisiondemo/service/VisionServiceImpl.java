@@ -1,6 +1,8 @@
 package com.hendisantika.springbootgooglevisiondemo.service;
 
 import com.google.cloud.spring.vision.CloudVisionTemplate;
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.Feature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ResourceLoader;
@@ -32,6 +34,13 @@ public class VisionServiceImpl implements VisionService {
     public String extractTextFromImage(MultipartFile file) {
         return cloudVisionTemplate.
                 extractTextFromImage(file.getResource());
+    }
+
+    @Override
+    public String getLandmarkFromImage(MultipartFile file) {
+        AnnotateImageResponse response = cloudVisionTemplate.analyzeImage(file.getResource(),
+                Feature.Type.LANDMARK_DETECTION);
+        return response.getLandmarkAnnotationsList().toString();
     }
 
 }
