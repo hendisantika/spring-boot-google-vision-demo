@@ -93,4 +93,10 @@ public class VisionServiceImpl implements VisionService {
         return baos.toByteArray();
     }
 
+    public static void annotateWithFaces(BufferedImage img, List<FaceAnnotation> faces) {
+        for (FaceAnnotation face : faces) {
+            annotateWithFace(img, face);
+        }
+    }
+
 }
