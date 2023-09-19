@@ -3,11 +3,14 @@ package com.hendisantika.springbootgooglevisiondemo.controller;
 import com.hendisantika.springbootgooglevisiondemo.service.VisionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -51,6 +54,13 @@ public class VisionController {
     @PostMapping("/extractTextFromPdf")
     public List<String> extractTextFromPdf(@RequestParam MultipartFile file) {
         return visionService.extractTextFromPdf(file);
+    }
+
+    //Detect face from Image
+    @PostMapping("/detectFaceFromImage")
+    public ResponseEntity<byte[]> detectFaceFromImage(@RequestParam MultipartFile file) throws IOException {
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).
+                body(visionService.detectFaceFromImage(file));
     }
 
 }
