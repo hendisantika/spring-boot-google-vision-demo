@@ -2,6 +2,7 @@ package com.hendisantika.springbootgooglevisiondemo.service;
 
 import com.google.cloud.spring.vision.CloudVisionTemplate;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.FaceAnnotation;
 import com.google.cloud.vision.v1.Feature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,11 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -69,6 +74,23 @@ public class VisionServiceImpl implements VisionService {
         return writeWithFaces(file,
                 outputImageResource.getFile().toPath(),
                 response.getFaceAnnotationsList());
+    }
+
+    private static byte[] writeWithFaces(MultipartFile file, Path outputPath, List<FaceAnnotation> faces)
+            throws IOException {
+
+        BufferedImage img = ImageIO.read(file.getInputStream());
+        annotateWithFaces(img, faces);
+
+        //Write file to resource folder, check resources folder
+        ImageIO.write(img, "jpg", outputPath.toFile());
+
+        //And
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(img, "jpg", baos);
+
+        //BufferedImage to byte array
+        return baos.toByteArray();
     }
 
 }
