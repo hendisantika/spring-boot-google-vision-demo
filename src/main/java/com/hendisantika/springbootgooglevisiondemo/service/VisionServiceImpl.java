@@ -9,6 +9,8 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : spring-boot-google-vision-demo
@@ -48,6 +50,11 @@ public class VisionServiceImpl implements VisionService {
         AnnotateImageResponse response = cloudVisionTemplate.analyzeImage(
                 file.getResource(), Feature.Type.LABEL_DETECTION);
         return response.getLabelAnnotationsList().toString();
+    }
+
+    @Override
+    public List<String> extractTextFromPdf(MultipartFile file) {
+        return cloudVisionTemplate.extractTextFromPdf(file.getResource());
     }
 
 }
