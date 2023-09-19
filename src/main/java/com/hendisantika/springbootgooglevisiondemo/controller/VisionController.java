@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : spring-boot-google-vision-demo
@@ -43,6 +45,12 @@ public class VisionController {
     @PostMapping("/detectLabelFromImage")
     public String detectLabelFromImage(@RequestParam MultipartFile file) {
         return visionService.detectLabelFromImage(file);
+    }
+
+    //Extract the text in a pdf
+    @PostMapping("/extractTextFromPdf")
+    public List<String> extractTextFromPdf(@RequestParam MultipartFile file) {
+        return visionService.extractTextFromPdf(file);
     }
 
 }
